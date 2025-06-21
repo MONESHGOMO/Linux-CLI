@@ -1,0 +1,31 @@
+in ubuntu the home path is not ( /home )  it should be ( /home/ubuntu) -> ubuntu mneans for system name 
+
+gomo@gomo:~/Desktop/linuc_cmd$ uname -a
+Linux gomo 6.11.0-17-generic #17~24.04.2-Ubuntu SMP PREEMPT_DYNAMIC Mon Jan 20 22:48:29 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+
+o:~/Desktop/linuc_cmd$ ^C
+gomo@gomo:~/Desktop/linuc_cmd$ whoami
+gomo
+gomo@gomo:~/Desktop/linuc_cmd$ 
+
+- ( control+ L) -> clear 
+
+- cmd : history
+
+- create a file : mkdir 
+- to go into teh file (  vi  filename.extension )  -> vi (editor)
+- to start typing -> ( enter i or insert ) 
+- to save the quit the file -> ( wq )
+- to quit without saving ( q! )
+
+
+---
+
+ vim install 
+
+ -  sudo apt-get install vim
+   sudo : to access kernal mode 
+   apt-get install - ( default )
+   vim - package name 
+
+   (47:00 ) ( https://www.youtube.com/watch?v=RsTeDuC6xHY&t=1615s )
