@@ -29,3 +29,281 @@ gomo@gomo:~/Desktop/linuc_cmd$
    vim - package name 
 
    (47:00 ) ( https://www.youtube.com/watch?v=RsTeDuC6xHY&t=1615s )
+
+
+   we can use 
+   
+   - vim or vi 
+
+
+   ---
+
+
+   nano is similar to vim (vi)
+
+
+   ---
+
+   control+shift+c -> to copy and control+shift+v -> to paste 
+
+   ---
+
+   putty -> to connect linux system
+
+   ---
+
+   to delete the entire row in the file 
+      - go to the index zeroth position and enter (d)  twice 
+
+---
+
+touch (cmd)  what is the use case 
+
+---
+
+
+gomo@gomo:~/data_terminal$ touch foo.txt
+gomo@gomo:~/data_terminal$ rm foot.txt
+rm: cannot remove 'foot.txt': No such file or directory
+gomo@gomo:~/data_terminal$ rm foo.txt
+gomo@gomo:~/data_terminal$ 
+
+
+---
+
+rm data.txt
+rm *.txt
+rm *
+
+---
+
+( cat cmd )
+
+gomo@gomo:~/data_terminal$ vi hello.txt
+gomo@gomo:~/data_terminal$ cat hello.txt 
+gknignierng
+ergr
+eg
+er
+ge
+g
+eg
+er
+gtr
+h
+
+wr
+
+gomo@gomo:~/data_terminal$ 
+
+
+---
+
+copy (cp)
+
+gomo@gomo:~/data_terminal$ cp hello.txt 
+cp: missing destination file operand after 'hello.txt'
+Try 'cp --help' for more information.
+gomo@gomo:~/data_terminal$ cp hello.txt new_hello.txt
+gomo@gomo:~/data_terminal$ ls
+hello.txt  new_hello.txt
+gomo@gomo:~/data_terminal$ cat new_hello.txt 
+gknignierng
+ergr
+eg
+er
+ge
+g
+eg
+er
+gtr
+h
+
+wr
+
+gomo@gomo:~/data_terminal$ 
+
+
+
+---
+
+{ important }
+by using { cat } we can able to create the  new file and  also we can able to copy the files 
+
+``` code 
+
+cat demo.txt >> new_file.txt 
+
+where : >> is mean for append 
+
+---
+
+demo.txt  hello.txt  rfile.txt
+gomo@gomo:~/data_terminal$ echo "monesh"
+monesh
+gomo@gomo:~/data_terminal$ 
+
+---
+
+gomo@gomo:~/data_terminal$ ls
+demo.txt  hello.txt  rfile.txt
+gomo@gomo:~/data_terminal$ echo "monesh"
+monesh
+gomo@gomo:~/data_terminal$ echo "monesh " >> rfile.txt 
+gomo@gomo:~/data_terminal$ cat rfile.txt 
+gknignierng
+ergr
+eg
+er
+ge
+g
+eg
+er
+gtr
+h
+
+wr
+
+monesh 
+gomo@gomo:~/data_terminal$ 
+
+---
+
+to create mkdir recursively
+
+
+/home/gomo
+gomo@gomo:~$ mkdir -p abc/test/demo
+gomo@gomo:~$ la
+abc            Desktop     .local                  .rustup
+.anydesk       Documents   Music                   snap
+.bash_history  .dotnet     .npm                    .ssh
+.bash_logout   Downloads   packages.microsoft.gpg  .sudo_as_admin_successful
+.bashrc        .fluvio     .pam_environment        Templates
+.cache         .fvm        Pictures                Videos
+.cargo         .gitconfig  .pki                    .vim
+.config        .gnupg      .postman                .viminfo
+data_terminal  .gphoto     .profile                .vscode
+demo           .lesshst    Public                  .wget-hsts
+gomo@gomo:~$ cd abc
+gomo@gomo:~/abc$ ls
+test
+gomo@gomo:~/abc$ cd test
+gomo@gomo:~/abc/test$ ls
+demo
+gomo@gomo:~/abc/test$ 
+
+---
+
+cd -  {  which helps to go to tegh previously visited directory }
+
+gomo@gomo:~/abc/test$ pwd
+/home/gomo/abc/test
+gomo@gomo:~/abc/test$ cd demo/
+gomo@gomo:~/abc/test/demo$ cd ../..
+gomo@gomo:~/abc$ pwd
+/home/gomo/abc
+gomo@gomo:~/abc$ cd -
+/home/gomo/abc/test/demo
+gomo@gomo:~/abc/test/demo$ 
+
+
+---
+
+ls -lstr {{ important }}
+
+
+---
+
+ls -a {{ used to see the hidden file and if we save the file as .filename they are considered as hidden files in linux }}
+
+
+---
+{{ important }} 
+.bashrc {{ a file is used to set the path variable for in the system similar to environment variable }}
+
+if we used to Download JDK and the directory is inside the Download directory we need to use the cmd 
+
+export java = /home/ubuntu/{JDK} {n use LLM's}
+
+and after that we need to execute the .bashrc file by using the cmd {{ source .bashrc or . . bashrc }}
+
+---
+
+{{ similat to searching a file using {{ search bar in file manager in windows }} }}
+
+
+
+omo@gomo:~/data_terminal$ ls -lstr
+total 64
+ 4 -rw-rw-r-- 1 gomo gomo    45 Jun 21 21:59 hello.txt
+ 4 -rw-rw-r-- 1 gomo gomo    45 Jun 21 22:00 demo.txt
+ 4 -rw-rw-r-- 1 gomo gomo    53 Jun 22 15:20 rfile.txt
+48 -rw-rw-r-- 1 gomo gomo 48631 Jun 22 15:22 history.txt
+ 4 -rw-rw-r-- 1 gomo gomo    53 Jun 25 04:43 Monesh.txt
+gomo@gomo:~/data_terminal$ touch Main.py
+gomo@gomo:~/data_terminal$ ls -*.py
+ls: invalid option -- '*'
+Try 'ls --help' for more information.
+gomo@gomo:~/data_terminal$ ls *.py
+Main.py
+gomo@gomo:~/data_terminal$ ls M*
+Main.py  Monesh.txt
+gomo@gomo:~/data_terminal$ 
+
+
+
+
+---
+
+to set alias name or nick name :  
+
+
+
+
+( Hard Link )
+
+
+gomo@gomo:~$ mkdir tutorial
+gomo@gomo:~$ cd tutorial/
+gomo@gomo:~/tutorial$ echo "hello linux" >> original.txt
+gomo@gomo:~/tutorial$ ls
+original.txt
+gomo@gomo:~/tutorial$ cat original.txt 
+hello linux
+gomo@gomo:~/tutorial$ ls -lstr
+total 4
+4 -rw-rw-r-- 1 gomo gomo 12 Jun 22 15:50 original.txt
+gomo@gomo:~/tutorial$ ln original.txt  team2Data.txt
+gomo@gomo:~/tutorial$ ls -lstr
+total 8
+4 -rw-rw-r-- 2 gomo gomo 12 Jun 22 15:50 team2Data.txt
+4 -rw-rw-r-- 2 gomo gomo 12 Jun 22 15:50 original.txt
+gomo@gomo:~/tutorial$ 
+
+
+---
+
+Soft Link   -> poiting to the file location not to the data 
+
+
+gomo@gomo:~/tutorial$ ls
+gomo@gomo:~/tutorial$ mkdir softlink
+gomo@gomo:~/tutorial$ ls
+softlink
+gomo@gomo:~/tutorial$ cd softlink/
+gomo@gomo:~/tutorial/softlink$ echo "soft link" >> original.txt
+gomo@gomo:~/tutorial/softlink$ ln -s original.txt new_data.txt
+gomo@gomo:~/tutorial/softlink$ ls
+new_data.txt  original.txt
+gomo@gomo:~/tutorial/softlink$ ls-lstr
+ls-lstr: command not found
+gomo@gomo:~/tutorial/softlink$ ls -lstr
+total 4
+4 -rw-rw-r-- 1 gomo gomo 10 Jun 22 15:55 original.txt
+0 lrwxrwxrwx 1 gomo gomo 12 Jun 22 15:56 new_data.txt -> original.txt
+gomo@gomo:~/tutorial/softlink$ 
+
+---
+
+nohup 
