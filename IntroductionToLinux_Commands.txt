@@ -261,7 +261,7 @@ to set alias name or nick name :
 
 
 
-( Hard Link )
+( Hard Link )  -> one file but two name { using [ ln ]}
 
 
 gomo@gomo:~$ mkdir tutorial
@@ -307,3 +307,181 @@ gomo@gomo:~/tutorial/softlink$
 ---
 
 nohup 
+
+data_terminal  Documents  packages.microsoft.gpg  snap       Videos
+demo           Downloads  Pictures                Templates
+gomo@gomo:~$ cd data_terminal/
+gomo@gomo:~/data_terminal$ ls
+demo.txt   history.txt  Main.java  Monesh.txt
+hello.txt  link         Main.py    rfile.txt
+gomo@gomo:~/data_terminal$ cd Main.py
+bash: cd: Main.py: Not a directory
+gomo@gomo:~/data_terminal$ vi Main.py
+gomo@gomo:~/data_terminal$ cat Main.py 
+import time
+
+a = 5
+b = 5
+
+while True :
+    a = a + b
+    print(f"Updated value of a: {a}")
+    time.sleep(3)
+
+gomo@gomo:~/data_terminal$ python3 Main.py
+Updated value of a: 10
+Updated value of a: 15
+Updated value of a: 20
+^CTraceback (most recent call last):
+  File "/home/gomo/data_terminal/Main.py", line 9, in <module>
+    time.sleep(3)
+KeyboardInterrupt
+
+gomo@gomo:~/data_terminal$ 
+
+
+gomo@gomo:~/data_terminal$ ls -lstr
+total 72
+ 4 -rw-rw-r-- 1 gomo gomo    45 Jun 21 21:59 hello.txt
+ 4 -rw-rw-r-- 1 gomo gomo    45 Jun 21 22:00 demo.txt
+ 4 -rw-rw-r-- 1 gomo gomo    53 Jun 22 15:20 rfile.txt
+48 -rw-rw-r-- 1 gomo gomo 48631 Jun 22 15:22 history.txt
+ 4 -rw-rw-r-- 1 gomo gomo    53 Jun 25 04:43 Monesh.txt
+ 4 -rw-rw-r-- 1 gomo gomo   405 Jun 25 05:15 Main.java
+ 4 -rw-rw-r-- 1 gomo gomo   110 Jun 26 19:04 Main.py
+
+ code :
+ 
+gomo@gomo:~/data_terminal$ nohup python3 Main.py >> PythonCode_Log.log &
+[1] 9703
+gomo@gomo:~/data_terminal$ nohup: ignoring input and redirecting stderr to stdout
+
+gomo@gomo:~/data_terminal$ 
+
+
+
+
+---
+
+ps -aux {name of the file which is running , not the terminal attachment }
+
+---
+
+zip file { creation and unzipping }
+
+-
+
+gomo@gomo:~/data_terminal$ mkdir createZip
+gomo@gomo:~/data_terminal$ ls
+createZip  hello.txt    Main.java  Monesh.txt          rfile.txt
+demo.txt   history.txt  Main.py    PythonCode_Log.log
+gomo@gomo:~/data_terminal$ zip gomoFile.zip createZip/
+  adding: createZip/ (stored 0%)
+gomo@gomo:~/data_terminal$ ls
+createZip  gomoFile.zip  history.txt  Main.py     PythonCode_Log.log
+demo.txt   hello.txt     Main.java    Monesh.txt  rfile.txt
+gomo@gomo:~/data_terminal$ 
+
+
+----
+
+word count { wc }
+
+gomo@gomo:~/data_terminal$ vi wordCount.txt 
+gomo@gomo:~/data_terminal$ 
+gomo@gomo:~/data_terminal$ cat wordCount.txt 
+linux is powerfull
+linux is opensource
+linnux is super cool
+rregter
+erteqwrt
+ergteqrt
+qergteqwr
+erteqwr
+ergeqwr
+eergtert
+monesh
+gomo@gomo:~/data_terminal$ head wordCount.txt 
+linux is powerfull
+linux is opensource
+linnux is super cool
+rregter
+erteqwrt
+ergteqrt
+qergteqwr
+erteqwr
+ergeqwr
+eergtert
+gomo@gomo:~/data_terminal$ tail wordCount.txt 
+linux is opensource
+linnux is super cool
+rregter
+erteqwrt
+ergteqrt
+qergteqwr
+erteqwr
+ergeqwr
+eergtert
+monesh
+gomo@gomo:~/data_terminal$ 
+
+
+
+
+
+----
+
+grep { global regular expression }  [ 02:09:00 ]
+
+
+gomo@gomo:~/data_terminal$ grep ERROR log1.txt
+[ERROR] File not found
+[ERROR] Timeout reached
+gomo@gomo:~/data_terminal$ grep INFO log1.txt
+[INFO] Server Started
+[INFO] Job Completed
+gomo@gomo:~/data_terminal$ 
+
+
+gomo@gomo:~/data_terminal$ grep -i error log1.txt  { -i => case insensitive }
+[ERROR] File not found
+[ERROR] Timeout reached
+
+gomo@gomo:~/data_terminal$ grep -v  ERROR log1.txt  { -v ignore }
+[INFO] Server Started
+[debug] Connection Successfull
+[INFO] Job Completed
+[WARNING] Low Memory
+gomo@gomo:~/data_terminal$ 
+
+
+{ search the error but we dont know the file name }
+
+
+
+gomo@gomo:~/data_terminal$ cat log2.txt
+gomo@gomo:~/data_terminal$ cat log1.txt  >> log2.txt
+gomo@gomo:~/data_terminal$ cat log2.txt
+[INFO] Server Started
+[debug] Connection Successfull
+[ERROR] File not found
+[INFO] Job Completed
+[WARNING] Low Memory
+[ERROR] Timeout reached
+gomo@gomo:~/data_terminal$ grep WARNING *.txt
+log1.txt:[WARNING] Low Memory
+log2.txt:[WARNING] Low Memory
+gomo@gomo:~/data_terminal$ 
+
+
+---
+
+
+SSH & SSP   { important commands Devops}
+
+- SSH -> { SECURE SHELL } 
+  - tO CONENCT TEH REMOTE SYSTEM { i.e { connecting my frined linnux system into my machine via { remote } }}
+  - real time : connect our  company linux server into our machine { using ID Address & password }
+- SCP -> { SECURE COPY }
+
+
