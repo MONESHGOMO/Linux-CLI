@@ -1,0 +1,42 @@
+- pwd 
+- ls
+- mkdir
+- rm -r {remove folder}
+- rm { remove files}
+- cd 
+- touch {create file}
+- vim Main.py { vim create afile if does not exists }
+- i {to start write }
+- esc { to quit from writing }
+- wq { save and quit }
+- w { only save }
+- q {quit without save }
+- q! {dont save just  quit }
+- cp { copy }  => cp source.txt destination.txt
+- mv {move} => fileName path
+- .gomo {hidden file}  => to see the hidden files 
+    == { ls -a } ==
+
+- ls -ltrh {to list in creation order based on date }
+- clear
+- head fileName => useCase to read the log file 
+- tail fileName => useCase to read the log file 
+- tail -f {dynamic , update if others  writing in a file }
+- ps
+- kill 
+- top
+- df
+- ssh { connecting to the remote server }
+    -> ssh ipaddress@hostname 
+- wget [to install app]
+- find [to find the file -name "fileName" ]
+- uname {system name}
+- date 
+- echo
+- wc {word count of a file { wc fileName }}
+- grep 
+- history
+- sudo [ super user do ] => must happen { Run As Administrator }
+- exit { exit from the linux terminal }
+- file gomo.txt => o/p => file name .txt
+- shutdown 
