@@ -1,0 +1,399 @@
+{ 02:05:00}
+grep { global regular exception }
+
+log1.txt
+log2.txt
+
+{ to get only the erro lines }
+
+root@48937543b162:/desktop# grep ERROR log1.txt
+2025-08-06 20:01:10 ERROR Failed to update stock for item ID: 42 - Database timeout
+
+root@48937543b162:/desktop# grep -i error log1.txt
+2025-08-06 20:01:10 ERROR Failed to update stock for item ID: 42 - Database timeout
+
+---
+
+{ to get logs without error [ -v ] }
+
+root@48937543b162:/desktop# grep -v -i error log1.txt
+2025-08-06 20:01:00 INFO  Server started on port 8080
+2025-08-06 20:01:02 INFO  Connected to MySQL database: restaurant_db
+2025-08-06 20:01:05 INFO  New request received: GET /api/stock
+2025-08-06 20:01:05 INFO  Fetching stock data for item: Rice
+
+2025-08-06 20:01:06 WARN  Stock level low for item: Oil (current: 2 units)
+2025-08-06 20:01:07 INFO  POST /api/sales - New sale recorded: ID 10923, amount ₹780
+
+2025-08-06 20:01:10 INFO  Retrying update... attempt 2/3
+2025-08-06 20:01:12 INFO  Update successful on retry
+
+2025-08-06 20:01:15 WARN  User admin@example.com attempted login with wrong password
+2025-08-06 20:01:17 INFO  User admin@example.com logged in successfully
+2025-08-06 20:01:20 INFO  Scheduled task: Daily report generation started
+
+202
+
+---
+
+{ to search the WARN from all files *}
+
+root@48937543b162:/desktop# grep -i warn *.txt
+log1.txt:2025-08-06 20:01:06 WARN  Stock level low for item: Oil (current: 2 units)
+log1.txt:2025-08-06 20:01:15 WARN  User admin@example.com attempted login with wrong password
+log2.txt:2025-08-06 21:00:08 WARN  Product stock is low for: Milk (5 units left)
+
+---
+
+{ to get the last 10 logs from the file }
+
+grep -i warn *.txt | tail -f
+
+or 
+
+ grep -i warn *.txt | tail -20
+---
+
+{ to search specific data in any file  }
+
+grep "Timeout" -r ~/logs
+
+---
+
+nohup  python3 Main.py >> data.log &
+
+---
+
+
+root@48937543b162:~/pythoncode# ps -aux | grep python3
+root        54  0.0  0.2  15092  8832 pts/0    S    20:53   0:00 python3 Main.py
+
+---
+
+
+SSH and SCP 
+
+SSH : Connecting the linux system via remote {Secure Sheel }  credentials : IP and password 
+SCP :  { Secure copy }  Putty 
+
+
+IP : 172.17.0.2
+
+ssh 172.17.0.2
+and password : { ###### } { remote system }
+---
+
+buffer/cache 
+
+monesh@GOMO:~$ free -m
+              total        used        free      shared  buff/cache   available
+Mem:           3759         344        2971           3         443        3339
+Swap:          1024           0        1024
+monesh@GOMO:~$ sudo sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+
+---
+
+ps -aux | grep python
+
+a => show process for all users 
+u => show the user whon owns the process and display in user format
+x => show process not attrached to a terminal ( background or daemon stuff or detached mode )
+
+---
+{ Kill process }
+
+monesh@GOMO:~/practice/code/python$ ps -aux | grep Main.py
+monesh       811  0.0  0.2  15844  8960 pts/0    S    14:02   0:00 python3 Main.py
+monesh       840  0.0  0.0   8172  2304 pts/0    S+   14:08   0:00 grep --color=auto Main.py
+monesh@GOMO:~/practice/code/python$ kill -9 811
+monesh@GOMO:~/practice/code/python$ kill -9 8960
+-bash: kill: (8960) - No such process
+[1]+  Killed                  nohup python3 Main.py >> Log.txt
+monesh@GOMO:~/practice/code/python$
+
+---
+
+SSH
+
+192.168.60.224 
+
+
+monesh@GOMO:~/practice/code/python$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet 10.255.255.254/32 brd 10.255.255.254 scope global lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 00:15:5d:8b:c5:6b brd ff:ff:ff:ff:ff:ff
+    inet 192.168.60.224/20 brd 192.168.63.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::215:5dff:fe8b:c56b/64 scope link
+       valid_lft forever preferred_lft forever
+monesh@GOMO:~/practice/code/python$ ssh 192.168.60.224
+monesh@192.168.60.224's password:
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 6.6.87.2-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri Aug  8 14:13:57 IST 2025
+
+  System load:  0.15                Processes:             40
+  Usage of /:   0.2% of 1006.85GB   Users logged in:       1
+  Memory usage: 10%                 IPv4 address for eth0: 192.168.60.224
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Infrastructure is not enabled.
+
+189 updates can be applied immediately.
+133 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+32 additional security updates can be applied with ESM Infra.
+Learn more about enabling ESM Infra service for Ubuntu 20.04 at
+https://ubuntu.com/20-04
+
+
+Last login: Fri Aug  8 13:55:24 2025
+monesh@GOMO:~$
+
+{ another way to connect SSH }
+
+monesh@GOMO:~$ hostname
+GOMO
+monesh@GOMO:~$ ssh monesh@GOMO
+
+tool : Putty 
+
+to terminate : exit 
+
+
+----
+
+{ Putty }
+
+select => copy 
+
+right click => paste 
+
+---
+
+SCP { Secure Copy }
+
+TO COPY FILE FROM ONE SYSTEM TO ANOTHER SYSTEM 
+
+
+monesh@GOMO:~$ /home/monesh/fileSCP.txt  monesh@GOMO:/home/monesh/testSCP/fileSCP_Test.txt
+-bash: /home/monesh/fileSCP.txt: Permission denied
+monesh@GOMO:~$ scp /home/monesh/fileSCP.txt  monesh@GOMO:/home/monesh/testSC
+P/fileSCP_Test.txt
+monesh@gomo's password:
+fileSCP.txt                               100%   87    76.0KB/s   00:00
+monesh@GOMO:~$ ls
+createdBy_SSH  desktop  fileSCP.txt  practice  testSCP
+monesh@GOMO:~$ cd testSCP/
+monesh@GOMO:~/testSCP$ ls
+fileSCP_Test.txt
+monesh@GOMO:~/testSCP$ cat fileSCP_Test.txt
+this is the file now we are going to send to the another system using SCP secure copy
+monesh@GOMO:~/testSCP$
+
+---
+
+{ SCP via tool }
+
+WinSCP app 
+
+---
+
+find cmd
+
+{ from current directory }
+
+monesh@GOMO:~$ ls
+createdBy_SSH  desktop  fileSCP.txt  practice  testSCP
+monesh@GOMO:~$ find *.txt
+fileSCP.txt
+monesh@GOMO:~$
+
+{ over all ( but care full while use , possibility for n no. of files to list )}
+
+monesh@GOMO:~$ find . -name "*.txt"
+./practice/practiceTest/logCopy.txt
+./practice/log.txt
+./practice/code/python/Log.txt
+./practice/data.txt
+./practice/countryFile.txt
+./testSCP/fileSCP_Test.txt
+./fileSCP.txt
+monesh@GOMO:~$
+
+{ using  file size }
+
+monesh@GOMO:~$ find . -type f -size +10M
+monesh@GOMO:~$ find . -type f -size +0M
+./.ssh/known_hosts
+./.bash_history
+./.hiddenFileGomo
+./practice/practiceTest/logCopy.txt
+./practice/log.txt
+./practice/code/python/Log.txt
+./practice/code/python/Main.py
+./practice/data.txt
+./practice/countryFile.txt
+./.viminfo
+./.profile
+./testSCP/fileSCP_Test.txt
+./.bash_logout
+./createdBy_SSH/Main.py
+./fileSCP.txt
+./.bashrc
+monesh@GOMO:~$
+
+
+{ files that are modified less than 24 hours }
+
+monesh@GOMO:~$ find . -mtime -1
+.
+./desktop
+./.sudo_as_admin_successful
+./.ssh
+./.ssh/known_hosts
+./.bash_history
+./.hiddenFileGomo
+./practice
+./practice/practiceTest
+./practice/practiceTest/logCopy.txt
+./practice/log.txt
+./practice/code
+./practice/code/python
+./practice/code/python/Log.txt
+./practice/code/python/Main.py
+./practice/data.txt
+./practice/countryFile.txt
+./.cache
+./.cache/motd.legal-displayed
+./.motd_shown
+./.landscape
+./.landscape/sysinfo.log
+./.viminfo
+./.profile
+./testSCP
+./testSCP/fileSCP_Test.txt
+./.bash_logout
+./createdBy_SSH
+./createdBy_SSH/Main.py
+./fileSCP.txt
+./.config
+./.config/procps
+./.bashrc
+
+{ empty file }
+
+monesh@GOMO:~$ find . -empty
+./desktop
+./.sudo_as_admin_successful
+./.cache/motd.legal-displayed
+./.motd_shown
+./.landscape/sysinfo.log
+./dummp
+./.config/procps
+monesh@GOMO:~$
+
+
+
+---
+find vs grep 
+
+
+| Aspect               | `find`                     | `grep`                 |
+| -------------------- | -------------------------- | ---------------------- |
+| **What it searches** | File names & directories   | Text inside files      |
+| **Output**           | File paths                 | Matching lines of text |
+| **Scope**            | File system structure      | File content           |
+| **Example**          | `find /home -name "*.txt"` | `grep "error" log.txt` |
+| **Recursive**        | Default                    | Needs `-r`             |
+| **Use case**         | Locate files               | Search text patterns   |
+
+----
+
+
+AWK { Aho , Weinberger , Kernighan }
+
+awk is a CLI tool for :
+   1. Processing columns in Text
+   2. Performance calculation
+   3. Extracting and formtting data from files 
+
+monesh@GOMO:~/awk_CLI$ awk '{print}' data.txt
+John 25 Developer
+Asha 30 Designer
+Ravi 28 Tester
+monesh@GOMO:~/awk_CLI$
+
+monesh@GOMO:~/awk_CLI$ awk '{print}' data.txt
+John 25 Developer
+Asha 30 Designer
+Ravi 28 Tester
+monesh@GOMO:~/awk_CLI$ awk '{print $1}' data.txt
+John
+Asha
+Ravi
+monesh@GOMO:~/awk_CLI$
+
+monesh@GOMO:~/awk_CLI$ awk '{print $1,$3}' data.txt
+John Developer
+Asha Designer
+Ravi Tester
+monesh@GOMO:~/awk_CLI$
+
+monesh@GOMO:~/awk_CLI$ awk '$2 > 27 {print $1,$3}' data.txt
+Asha Designer
+Ravi Tester
+monesh@GOMO:~/awk_CLI$
+
+
+monesh@GOMO:~/awk_CLI$ awk '{printf "Name: %s | Age: %s | Role: %s\n", $1, $2, $3}' data.txt
+Name: John | Age: 25 | Role: Developer
+Name: Asha | Age: 30 | Role: Designer
+Name: Ravi | Age: 28 | Role: Tester
+monesh@GOMO:~/awk_CLI$
+
+----
+
+change mode { w,r,} Permission for files and directory 
+
+drwxr-xr-x  [ 'user','group',others]
+
+chmod 777 main.sh { all Permission enabled }
+
+d -> directory
+r -> read 
+w -> write 
+
+
+
+| Permission             | Symbol | Numeric Value | Meaning for Files                | Meaning for Directories                 | Common Combinations | Combination Symbolic | Combination Numeric |
+| ---------------------- | ------ | ------------- | -------------------------------- | --------------------------------------- | ------------------- | -------------------- | ------------------- |
+| Read                   | `r`    | `4`           | View file content                | List directory contents                 | Read only           | `r--`                | `4`                 |
+| Write                  | `w`    | `2`           | Modify file content              | Create, delete, or rename files         | Write only          | `-w-`                | `2`                 |
+| Execute                | `x`    | `1`           | Run the file as a program/script | Enter directory and access its contents | Execute only        | `--x`                | `1`                 |
+| Read + Write           | `rw-`  | `6`           | View & modify file               | List, create, delete in dir             | Read + Write        | `rw-`                | `6`                 |
+| Read + Execute         | `r-x`  | `5`           | View & run file                  | List and enter dir                      | Read + Execute      | `r-x`                | `5`                 |
+| Write + Execute        | `-wx`  | `3`           | Modify & run file                | Create/delete and enter dir             | Write + Execute     | `-wx`                | `3`                 |
+| Read + Write + Execute | `rwx`  | `7`           | Full access                      | Full access                             | Full access         | `rwx`                | `7`                 |
+
+----
+
+what is scheduling 
+
+cron
+Airflow
+even while you can use 
+
