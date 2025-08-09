@@ -393,7 +393,178 @@ w -> write
 
 what is scheduling 
 
-cron
-Airflow
-even while you can use 
+ |  cron                   | cli
+ | Airflow                 | cli
+ |even while you can use   | cli
+
+Scheduling vs Automation 
+
+Automation
+
+import java.sql.*;
+import java.time.LocalDate;
+
+public class UserStatusAutomation {
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://localhost:3306/testdb";
+        String user = "root";
+        String password = "password";
+
+        // Update users who haven't logged in for 30+ days and aren't inactive yet
+        String query = "UPDATE users SET status='INACTIVE' WHERE last_login < ? AND status != 'INACTIVE'";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the cutoff date: today minus 30 days
+            stmt.setDate(1, Date.valueOf(LocalDate.now().minusDays(30)));
+
+            int updated = stmt.executeUpdate();
+            System.out.println(updated + " users marked as INACTIVE.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+What is Automation Here?
+Automation means the task of checking and updating user status runs without manual work.
+
+Instead of a person running this code every day, you schedule it (e.g., via a cron job on Linux or Windows Task Scheduler).
+
+The scheduled job runs this Java program daily (or at any interval you choose).
+
+It automatically connects to the MySQL database, checks which users are inactive for more than 30 days, and updates their status.
+
+This saves time, avoids human error, and keeps your data always up-to-date without manual intervention.
+
+
+
+
+{ Scheduling }
+corn formula : https://crontab.guru/
+ crontab.guru 
+---
+
+
+{ scheduling  ? }
+
+---
+
+openjdl-17-jdk 
+
+
+
+----
+
+Shell Scripting 
+
+
+#! is a special two-character sequence that signals:
+"Use the program specified on this line to run the file."
+
+/bin/bash is the full path to the Bash shell executable on most Linux systems.
+
+
+
+monesh@GOMO:~$ vi test.sh
+
+#!/bin/bash  { bash shell path }
+echo "Hello gomo"
+
+monesh@GOMO:~$ sh test.sh
+Hello gomo
+monesh@GOMO:~$
+
+
+{ to use variables in the print statements }
+
+#!/bin/bash
+name="Monesh"
+echo "Hello , $name"
+
+monesh@GOMO:~/ShellScripting$ sh Name.sh
+Hello , Monesh
+
+
+{ user input }
+
+monesh@GOMO:~/ShellScripting$ vi UserInput.sh
+
+#!/bin/bash
+echo "Enter your name : "
+read userName
+echo "Welcome, $userName "
+
+monesh@GOMO:~/ShellScripting$ sh UserInput.sh
+Enter your name :
+linux
+Welcome, linux
+
+{ if-else condition }
+
+
+#!/bin/bash
+
+echo "Enter the number : "
+read num
+
+if [ $num -gt 9 ];  then
+        echo "Numner is greater than 9"
+else
+        echo "Number is smaller than 9"
+fi
+
+{ Loop }
+
+#!/bin/bash
+
+for i in 1 2 3 4 5
+do
+        echo "Looping ... number $i"
+done
+
+{ file handling in the current directory }
+
+#!/bin/bash
+
+fileName="test.txt"
+
+if [ -f "$fileName" ]; then
+    echo "File exists"
+else
+    echo "File does not exist."
+fi
+
+{ fucntion with no parameter }
+
+#!/bin/bash
+
+sayHello(){
+        echo "Say hello fucntion is called "
+}
+
+sayHello
+
+
+{ function with parameter }
+
+
+#!/bin/bash
+
+echo "Script Name: $0"  # we dont want to use this for passing arguments 
+echo "First Argument: $1"
+echo "Second Argument: $2"
+
+echo " Hello, $1 your role is $2"
+
+output :
+monesh@GOMO:~/ShellScripting$ sh FunctionWithParameter.sh monesh backend_developer
+Script Name: FunctionWithParameter.sh
+First Argument: monesh
+Second Argument: backend_developer
+ Hello, monesh your role is backend_developer
+monesh@GOMO:~/ShellScripting$
 
